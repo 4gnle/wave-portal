@@ -3,33 +3,41 @@ async function main() {
   // Main Contract functions  described
   const [owner, randoPerson] = await hre.ethers.getSigners();
 
-  const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
+  const greetings = await hre.ethers.getContractFactory("Greetings");
 
-  const waveContract = await waveContractFactory.deploy();
+  const greetingsContract = await greetings.deploy();
 
-  await waveContract.deployed();
+  await greetingsContract.deployed();
 
-  console.log("Contract deployed to:", waveContract.address);
+  console.log("Contract deployed to:", greetingsContract.address);
   console.log("Contract deployed by:", owner.address);
 
   // Interacting with the Contract
   let waveCount;
-  waveCount = await waveContract.getTotalWaves();
+  waveCount = await greetingsContract.getTotalWaves();
+  console.log(waveCount.toNumber());
 
   let highfiveCount;
-  highfiveCount = await waveContract.getHighfives();
+  highfiveCount = await greetingsContract.getHighfives();
+  console.log(highfiveCount.toNumber());
 
-  let waveTxn = await waveContract.wave();
+  let waveTxn = await greetingsContract.wave("HELLO!");
   await waveTxn.wait();
 
-  let waveAndHighFive = await waveContract.waveAndHighFive();
+  let waveAndHighFive = await greetingsContract.waveAndHighFive("Hello", "Angel");
   await waveAndHighFive.wait();
 
-  waveTxn = await waveContract.connect(randoPerson).wave();
+  waveTxn = await greetingsContract.connect(randoPerson).wave("HELLO 222!");
   await waveTxn.wait();
 
-  highfiveCount = await waveContract.getHighfives();
-  waveCount = await waveContract.getTotalWaves();
+  highfiveCount = await greetingsContract.getHighfives();
+  waveCount = await greetingsContract.getTotalWaves();
+  console.log(highfiveCount);
+
+  let allWaves = await greetingsContract.getSentWAVES();
+  let allHighfives = await greetingsContract.getSentHIGHFIVES();
+  console.log(allWaves);
+  console.log(allHighfives);
 }
 
 main()
