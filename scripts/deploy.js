@@ -5,10 +5,10 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   // Interacting with the Contract
-  const Token = await hre.ethers.getContractFactory("WavePortal");
+  const Token = await hre.ethers.getContractFactory("Greetings");
   const token = await Token.deploy();
 
-  console.log("WavePortal address:", token.address);
+  console.log("Greetings Contract address:", token.address);
 }
 
 main()
