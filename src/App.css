@@ -1,0 +1,65 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 64px;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.header {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: gray;
+}
+
+.bio {
+  text-align: center;
+  color: gray;
+  margin-top: 16px;
+}
+
+.waveButton {
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.wave-board {
+  box-sizing: border-box;
+  box-shadow: 0px 1px 12px white;
+  border-radius: 18px;
+  background-color: #1C2333;
+  margin: 5px;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.wave-board > p {
+  font-size: 12px;
+  text-decoration: underline;
+  color: blanchedalmond;
+}
+
+.wave-board > h2 {
+  font-size: 14px;
+  color: white;
+}
+
+.wave-board > h1 {
+  font-size: 18px;
+  font-weight: lighter;
+  color: red;
+}
+
+.wave-board > h3 {
+  color: green;
+}
