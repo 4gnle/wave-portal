@@ -3,6 +3,8 @@ import { ethers } from "ethers";
 import './App.css';
 import abi from './utils/contractABI.json';
 
+import Spinner from './UI/Spinner';
+
 export default function App() {
 
   const [currentAccount, setCurrentAccount] = React.useState();
@@ -10,7 +12,7 @@ export default function App() {
   const contractABI = abi.abi;
 
   const checkWallet = () => {
-    
+
     const {ethereum} = window;
 
     if(!ethereum) {
@@ -48,11 +50,13 @@ export default function App() {
 
   const [allWaves, setAllWaves] = React.useState([]);
   const [allHighfives, setAllhighfives] = React.useState([]);
+  const [spinner, setSpinner] = React.useState(false);
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
   const getWaves = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
     let waves = await greetingsContract.getSentWAVES();
 
@@ -70,9 +74,6 @@ export default function App() {
   }
 
   const getHighfives = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
     let highfives = greetingsContract.getSentHIGHFIVES();
 
@@ -91,29 +92,30 @@ export default function App() {
   }
 
   const wave = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
-
     let count = await greetingsContract.getTotalWaves();
-    console.log("Retrieved Total Wave Count...", count.toNumber())
 
-    const waveTxn = await greetingsContract.wave("MESSAGE");
-    console.log('Mining...', waveTxn.hash);
-    await waveTxn.wait();
-    console.log('Mined...', waveTxn.hash);
+    try {
+      setSpinner(true);
+      const waveTxn = await greetingsContract.wave("MESSAGE");
+      await waveTxn.wait();
+      setSpinner(false);
+      getWaves();
+    } catch (err) {
+      console.log(err);
+    }
 
     count = await greetingsContract.getTotalWaves();
-    console.log("These are the total waves sent", count.toNumber());
   }
 
    React.useEffect(() => {
     checkWallet();
     getWaves();
   }, []);
-  
+
   return (
     <div className="mainContainer">
+
+      {spinner && <Spinner/>}
 
       <div className="dataContainer">
         <div className="header">
@@ -121,7 +123,7 @@ export default function App() {
         </div>
 
         <div className="bio">
-        My name is Angel and I wave back at people. I also like high fives 
+        My name is Angel and I wave back at people. I also like high fives
         </div>
 
         <button className="waveButton" onClick={wave}>
@@ -144,7 +146,7 @@ export default function App() {
             <h3>At this time: {wave.timestamp.toLocaleString ()}</h3>
           </div>
         )})}
-        
+
       </div>
     </div>
   );
