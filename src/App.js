@@ -4,6 +4,8 @@ import './App.css';
 import abi from './utils/contractABI.json';
 
 import Spinner from './UI/Spinner';
+import Button from './UI/Button';
+import Input from './UI/Input';
 
 export default function App() {
 
@@ -12,7 +14,6 @@ export default function App() {
   const contractABI = abi.abi;
 
   const checkWallet = () => {
-
     const {ethereum} = window;
 
     if(!ethereum) {
@@ -52,14 +53,13 @@ export default function App() {
   const [allHighfives, setAllhighfives] = React.useState([]);
   const [spinner, setSpinner] = React.useState(false);
 
-  const [message, setMessage] = React.useState('')
+  const [message, setMessage] = React.useState()
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
 
   const getWaves = async () => {
-
     let waves = await greetingsContract.getSentWAVES();
 
     let mappedWaves = [];
@@ -93,16 +93,18 @@ export default function App() {
     setAllhighfives(mappedHighfives);
   }
 
-  const wave = async () => {
+  const wave = async (e) => {
+    e.preventDefault();
     let count = await greetingsContract.getTotalWaves();
 
     try {
       setSpinner(true);
-      const waveTxn = await greetingsContract.wave('message');
+      const waveTxn = await greetingsContract.wave(`${message}`);
       await waveTxn.wait();
       setSpinner(false);
       getWaves();
     } catch (err) {
+      setSpinner(false);
       console.log(err);
     }
 
@@ -133,31 +135,35 @@ export default function App() {
         My name is Angel and I wave back at people. I also like high fives
         </div>
         <br/>
-        <input
-          style={{textAlign: "left", height: "50px", fontSize: "18px"}}
+        <div className='buttonDiv'>
+
+        <Input
           onChange={e => onChange(e)}
           value={message}
-          placeholder="Send a message"
-        />
+          placeholder="Send a message">
+        </Input>
 
-        <button className="waveButton" onClick={wave}>
-          Wave at Me
-        </button>
+        <Button
+          onClick={e => wave(e)}
+          className='waveButton'
+          >
+        Wave at Me</Button>
+        </div>
 
         {currentAccount ? null : (
         <button className="waveButton" onClick={connectWallet}>
           Connect Wallet
         </button>)}
 
-        <h1 style={{color: 'white', textAlign: 'center'}}>List of Waves:</h1>
+        <h1 style={{color: 'white', textAlign: 'center', margin: '10px'}}>List of Waves:</h1>
 
-        {allWaves.map((wave) => {
+        {allWaves.reverse().map((wave) => {
           return (
           <div className="wave-board">
             <p>{wave.address}</p>
-            <h1>Sent a highfive</h1>
+            <h1>Sent a wave</h1>
             <h2>{wave.message}</h2>
-            <h3>At this time: {wave.timestamp.toLocaleString ()}</h3>
+            <h3>{wave.timestamp.toLocaleString ()}</h3>
           </div>
         )})}
 
