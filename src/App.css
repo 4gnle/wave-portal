@@ -41,25 +41,26 @@
   margin: 5px;
   margin-top: 15px;
   padding: 10px;
+  text-align: center;
 }
 
 .wave-board > p {
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: underline;
   color: blanchedalmond;
 }
 
 .wave-board > h2 {
-  font-size: 14px;
+  font-size: 16px;
   color: white;
 }
 
 .wave-board > h1 {
-  font-size: 18px;
-  font-weight: lighter;
-  color: red;
+  font-size: 20px;
+  color: darkgray;
 }
 
 .wave-board > h3 {
   color: green;
+  font-size: 12px;
 }

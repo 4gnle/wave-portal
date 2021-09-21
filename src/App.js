@@ -52,6 +52,8 @@ export default function App() {
   const [allHighfives, setAllhighfives] = React.useState([]);
   const [spinner, setSpinner] = React.useState(false);
 
+  const [message, setMessage] = React.useState('')
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const greetingsContract = new ethers.Contract(contractAddress, contractABI, signer);
@@ -96,7 +98,7 @@ export default function App() {
 
     try {
       setSpinner(true);
-      const waveTxn = await greetingsContract.wave("MESSAGE");
+      const waveTxn = await greetingsContract.wave('message');
       await waveTxn.wait();
       setSpinner(false);
       getWaves();
@@ -105,6 +107,11 @@ export default function App() {
     }
 
     count = await greetingsContract.getTotalWaves();
+  }
+
+  const onChange = (e) => {
+    setMessage(e.target.value);
+    console.log(message);
   }
 
    React.useEffect(() => {
@@ -125,6 +132,13 @@ export default function App() {
         <div className="bio">
         My name is Angel and I wave back at people. I also like high fives
         </div>
+        <br/>
+        <input
+          style={{textAlign: "left", height: "50px", fontSize: "18px"}}
+          onChange={e => onChange(e)}
+          value={message}
+          placeholder="Send a message"
+        />
 
         <button className="waveButton" onClick={wave}>
           Wave at Me
@@ -140,9 +154,9 @@ export default function App() {
         {allWaves.map((wave) => {
           return (
           <div className="wave-board">
-            <p>Address {wave.address}</p>
+            <p>{wave.address}</p>
             <h1>Sent a highfive</h1>
-            <h2>And a message: {wave.message}</h2>
+            <h2>{wave.message}</h2>
             <h3>At this time: {wave.timestamp.toLocaleString ()}</h3>
           </div>
         )})}
