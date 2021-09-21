@@ -35,7 +35,7 @@ contract Greetings {
 
   function wave(string memory _message) public {
     totalWaves+= 1;
-    
+
     waves.push(Wave(msg.sender, _message, block.timestamp));
 
     emit newWave(msg.sender, block.timestamp, _message);
@@ -50,6 +50,13 @@ contract Greetings {
 
     highfives.push(HighFive(msg.sender, _message, _name, block.timestamp));
     emit newHighfive(msg.sender, block.timestamp, _message, _name);
+
+    uint prizeAmount = 0.001 ether;
+    require(prizeAmount <= address(this).balance, 'Trying to withdraw more money than the contract has');
+
+    (bool success,) = (msg.sender).call{value: prizeAmount}("");
+    
+    require(success, "Failed to withdraw money from contract."))
   }
 
   function getTotalWaves() view public returns (uint256) {

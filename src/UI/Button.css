@@ -1,9 +1,9 @@
 .glow-on-hover {
-    width: 220px;
+    width: 225px;
     height: 50px;
     border: none;
     outline: none;
-    color: black;
+    color: white;
     background: white;
     cursor: pointer;
     position: relative;
@@ -47,7 +47,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: white;
+    background: black;
     left: 0;
     top: 0;
     border-radius: 10px;

@@ -113,7 +113,6 @@ export default function App() {
 
   const onChange = (e) => {
     setMessage(e.target.value);
-    console.log(message);
   }
 
    React.useEffect(() => {
@@ -138,11 +137,12 @@ export default function App() {
         <div className='buttonDiv'>
 
         <Input
+          style={{marginBottom: '18px'}}
           onChange={e => onChange(e)}
           value={message}
           placeholder="Send a message">
         </Input>
-
+        <br/>
         <Button
           onClick={e => wave(e)}
           className='waveButton'

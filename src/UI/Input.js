@@ -2,10 +2,11 @@ import React from 'react'
 
 import './Input.css'
 
-const Input = ({onChange, children, placeholder}) => {
+const Input = ({onChange, style, children, placeholder}) => {
   return (
     <input
-    className="glow-on-active"
+    style={style}
+    className="glow"
     onChange={onChange}
     placeholder={placeholder}
     />
