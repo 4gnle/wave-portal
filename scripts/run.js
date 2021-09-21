@@ -5,12 +5,15 @@ async function main() {
 
   const greetings = await hre.ethers.getContractFactory("Greetings");
 
-  const greetingsContract = await greetings.deploy();
+  const greetingsContract = await greetings.deploy({value: hre.ethers.utils.parseEther("0.1")});
 
   await greetingsContract.deployed();
 
   console.log("Contract deployed to:", greetingsContract.address);
   console.log("Contract deployed by:", owner.address);
+
+  let contractBalance = await hre.ethers.provider.getBalance(greetingsContract.address);
+  console.log("The contract has:", hre.ethers.utils.formatEther(contractBalance, "ether"))
 
   // Interacting with the Contract
   let waveCount;
@@ -24,8 +27,8 @@ async function main() {
   let waveTxn = await greetingsContract.wave("HELLO!");
   await waveTxn.wait();
 
-  let waveAndHighFive = await greetingsContract.waveAndHighFive("Hello", "Angel");
-  await waveAndHighFive.wait();
+  let highFive = await greetingsContract.highFive("Hello", "Angel");
+  await highFive.wait();
 
   waveTxn = await greetingsContract.connect(randoPerson).wave("HELLO 222!");
   await waveTxn.wait();

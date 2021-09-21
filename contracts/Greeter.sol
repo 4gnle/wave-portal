@@ -29,7 +29,7 @@ contract Greetings {
   Wave[] waves;
   HighFive[] highfives;
 
-  constructor() {
+  constructor() payable {
     console.log("WHAT UP, I am a contract and I am also very smart :)");
   }
 
@@ -52,7 +52,7 @@ contract Greetings {
 
     (bool success,) = (msg.sender).call{value: prizeAmount}("");
 
-    require(success, "Failed to withdraw money from contract."))
+    require(success, "Failed to withdraw money from contract.");
   }
 
   function getTotalWaves() view public returns (uint256) {

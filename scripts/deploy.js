@@ -1,14 +1,11 @@
 async function main() {
-  const [deployer] = await hre.ethers.getSigners();
+  const greetings = await hre.ethers.getContractFactory("Greetings");
 
-  console.log("Contract deploying with:", deployer.address);
-  console.log("Account balance:", (await deployer.getBalance()).toString());
+  const greetingsContract = await greetings.deploy({value: hre.ethers.utils.parseEther("0.1")});
 
-  // Interacting with the Contract
-  const Token = await hre.ethers.getContractFactory("Greetings");
-  const token = await Token.deploy();
+  await greetingsContract.deployed();
 
-  console.log("Greetings Contract address:", token.address);
+  console.log("Contract deploying with:", greetingsContract.address);
 }
 
 main()
