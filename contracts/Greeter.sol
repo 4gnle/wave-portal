@@ -41,12 +41,8 @@ contract Greetings {
     emit newWave(msg.sender, block.timestamp, _message);
   }
 
-  function waveAndHighFive(string memory _message, string memory _name) public {
-    totalWaves +=1;
+  function highFive(string memory _message, string memory _name) public {
     highFives +=1;
-
-    waves.push(Wave(msg.sender, _message, block.timestamp));
-    emit newWave(msg.sender, block.timestamp, _message);
 
     highfives.push(HighFive(msg.sender, _message, _name, block.timestamp));
     emit newHighfive(msg.sender, block.timestamp, _message, _name);
@@ -55,7 +51,7 @@ contract Greetings {
     require(prizeAmount <= address(this).balance, 'Trying to withdraw more money than the contract has');
 
     (bool success,) = (msg.sender).call{value: prizeAmount}("");
-    
+
     require(success, "Failed to withdraw money from contract."))
   }
 

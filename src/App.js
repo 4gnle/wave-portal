@@ -127,7 +127,7 @@ export default function App() {
 
       <div className="dataContainer">
         <div className="header">
-        <span role="img" aria-label="wave emoji">👋</span> WHAT UP
+         WHAT UP
         </div>
 
         <div className="bio">
@@ -155,8 +155,9 @@ export default function App() {
           Connect Wallet
         </button>)}
 
-        <h1 style={{color: 'white', textAlign: 'center', margin: '10px'}}>List of Waves:</h1>
+        <h1 className='wave-title'>List of Waves<span role="img" aria-label="wave emoji">👋</span></h1>
 
+        <div className='wave-board-list'>
         {allWaves.reverse().map((wave) => {
           return (
           <div className="wave-board">
@@ -166,6 +167,21 @@ export default function App() {
             <h3>{wave.timestamp.toLocaleString ()}</h3>
           </div>
         )})}
+        </div>
+
+        <h1 className='highfive-title'>List of Waves:</h1>
+
+        <div className='highfive-board-list'>
+          {allHighfives.reverse().map((wave) => {
+            return (
+            <div className="wave-board">
+              <p>{wave.address}</p>
+              <h1>Gave you a highfive</h1>
+              <h2>{wave.message}</h2>
+              <h3>{wave.timestamp.toLocaleString ()}</h3>
+            </div>
+          )})}
+        </div>
 
       </div>
     </div>
