@@ -4,11 +4,18 @@ input {
   text-align: center;
   border: 2px solid #aeaeb5;
   border-radius: 10px;
-  margin-top: -10px;
+  margin: -10px 0px 0px 0px;
   outline: none;
 }
-input:focus {
+
+.wave input:focus {
   outline: none;
   border-color: #48ff00;
   box-shadow: 0 2px 10px #26bf47;
+}
+
+.highfive input:focus {
+  outline: none;
+  border-color: #F4C73D;
+  box-shadow: 0 2px 10px #F4C73D;
 }

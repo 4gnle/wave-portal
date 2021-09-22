@@ -68,6 +68,8 @@ export default function App() {
 
     let mappedWaves = [];
 
+    console.log(waves)
+
     waves.forEach(wave => {
       mappedWaves.push({
         address: wave.waver,
@@ -81,11 +83,11 @@ export default function App() {
 
   const getHighfives = async () => {
 
-    let highfives = greetingsContract.getSentHIGHFIVES();
+    let highfives1 = await greetingsContract.getSentHIGHFIVES();
 
     let mappedHighfives = [];
 
-    highfives.forEach(highfive => {
+    highfives1.forEach(highfive => {
       mappedHighfives.push({
         address: highfive.highfiver,
         message: highfive.message,
@@ -93,7 +95,6 @@ export default function App() {
         timestamp: new Date(highfive.timestamp * 1000)
       })
     })
-
     setAllhighfives(mappedHighfives);
   }
 
@@ -166,13 +167,14 @@ export default function App() {
         </div>
         <br/>
         <div className='wave-buttonDiv'>
-
-        <Input
-          style={{marginBottom: '18px'}}
-          onChange={e => onChange(e)}
-          value={message}
-          placeholder="Send a message">
-        </Input>
+          <div className='wave'>
+          <Input
+            style={{marginBottom: '18px'}}
+            onChange={e => onChange(e)}
+            value={message}
+            placeholder="Send a message">
+          </Input>
+          </div>
         <br/>
         <Button
           onClick={e => wave(e)}
@@ -183,18 +185,23 @@ export default function App() {
 
         <div className='highfive-buttonDiv'>
 
-        <Input
-          style={{marginBottom: '18px'}}
-          onChange={e => onChange1(e)}
-          value={message1}
-          placeholder="Send a message">
-        </Input>
-        <Input
-          style={{marginBottom: '18px'}}
-          onChange={e => onChange2(e)}
-          value={name}
-          placeholder="Write your name">
-        </Input>
+          <div className='highfive'>
+            <Input
+              style={{marginBottom: '18px'}}
+              onChange={e => onChange1(e)}
+              value={message1}
+              placeholder="Send a message">
+            </Input>
+
+            <Input
+              style={{marginBottom: '18px'}}
+              onChange={e => onChange2(e)}
+              value={name}
+              placeholder="Write your name">
+            </Input>
+          </div>
+
+
         <br/>
         <Button
           onClick={e => highfive(e)}
@@ -227,11 +234,11 @@ export default function App() {
         <div className='highfive-board-list'>
           {allHighfives.reverse().map((highfive) => {
             return (
-            <div className="wave-board">
-              <h2>{highfive.name} from</h2>
+            <div className="highfive-board">
+              <h2>{highfive.name}</h2><h3>at</h3>
               <p>{highfive.address}</p>
-              <h1>Gave you a highfive</h1>
-              <h2>{highfive.message}</h2>
+              <h2>Gave you a highfive with a message:</h2>
+              <h1>"{highfive.message}"</h1>
               <h3>{highfive.timestamp.toLocaleString ()}</h3>
             </div>
           )})}
