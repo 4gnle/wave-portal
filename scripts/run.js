@@ -5,7 +5,7 @@ async function main() {
 
   const greetings = await hre.ethers.getContractFactory("Greetings");
 
-  const greetingsContract = await greetings.deploy({value: hre.ethers.utils.parseEther("0.1")});
+  const greetingsContract = await greetings.deploy({value: hre.ethers.utils.parseEther("50")});
 
   await greetingsContract.deployed();
 

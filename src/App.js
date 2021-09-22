@@ -10,7 +10,7 @@ import Input from './UI/Input';
 export default function App() {
 
   const [currentAccount, setCurrentAccount] = React.useState();
-  const contractAddress = "0xFa51B4EaD694b6A3297C7e15252C4731E052a2F5";
+  const contractAddress = "0x26cD1Edda2b65681A16ab31008Dbf3cbaAE7FD4E";
   const contractABI = abi.abi;
 
   const checkWallet = () => {
@@ -54,6 +54,10 @@ export default function App() {
   const [spinner, setSpinner] = React.useState(false);
 
   const [message, setMessage] = React.useState()
+  const [message1, setMessage1] = React.useState()
+
+  const [name, setName] = React.useState()
+
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -111,13 +115,40 @@ export default function App() {
     count = await greetingsContract.getTotalWaves();
   }
 
+  const highfive = async (e) => {
+    e.preventDefault();
+    let count = await greetingsContract.getHighfives();
+
+    try {
+      setSpinner(true);
+      const highfiveTxn = await greetingsContract.highFive(`${message1}`, `${name}`);
+      await highfiveTxn.wait();
+      setSpinner(false);
+      getHighfives();
+    } catch (err) {
+      setSpinner(false);
+      console.log(err);
+    }
+
+    count = await greetingsContract.getHighfives();
+  }
+
   const onChange = (e) => {
     setMessage(e.target.value);
+  }
+
+  const onChange1 = (e) => {
+    setMessage1(e.target.value);
+  }
+
+  const onChange2 = (e) => {
+    setName(e.target.value);
   }
 
    React.useEffect(() => {
     checkWallet();
     getWaves();
+    getHighfives();
   }, []);
 
   return (
@@ -134,7 +165,7 @@ export default function App() {
         My name is Angel and I wave back at people. I also like high fives
         </div>
         <br/>
-        <div className='buttonDiv'>
+        <div className='wave-buttonDiv'>
 
         <Input
           style={{marginBottom: '18px'}}
@@ -148,6 +179,28 @@ export default function App() {
           className='waveButton'
           >
         Wave at Me</Button>
+        </div>
+
+        <div className='highfive-buttonDiv'>
+
+        <Input
+          style={{marginBottom: '18px'}}
+          onChange={e => onChange1(e)}
+          value={message1}
+          placeholder="Send a message">
+        </Input>
+        <Input
+          style={{marginBottom: '18px'}}
+          onChange={e => onChange2(e)}
+          value={name}
+          placeholder="Write your name">
+        </Input>
+        <br/>
+        <Button
+          onClick={e => highfive(e)}
+          className='waveButton'
+          >
+        Highfive me</Button>
         </div>
 
         {currentAccount ? null : (
@@ -169,16 +222,17 @@ export default function App() {
         )})}
         </div>
 
-        <h1 className='highfive-title'>List of Waves:</h1>
+        <h1 className='highfive-title'>List of Highfives<span role="img" aria-label="highfive emoji">🙏</span> </h1>
 
         <div className='highfive-board-list'>
-          {allHighfives.reverse().map((wave) => {
+          {allHighfives.reverse().map((highfive) => {
             return (
             <div className="wave-board">
-              <p>{wave.address}</p>
+              <h2>{highfive.name} from</h2>
+              <p>{highfive.address}</p>
               <h1>Gave you a highfive</h1>
-              <h2>{wave.message}</h2>
-              <h3>{wave.timestamp.toLocaleString ()}</h3>
+              <h2>{highfive.message}</h2>
+              <h3>{highfive.timestamp.toLocaleString ()}</h3>
             </div>
           )})}
         </div>
