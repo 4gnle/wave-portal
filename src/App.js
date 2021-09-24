@@ -175,7 +175,6 @@ export default function App() {
             placeholder="Send a message">
           </Input>
           </div>
-        <br/>
         <Button
           onClick={e => wave(e)}
           className='waveButton'
@@ -200,9 +199,6 @@ export default function App() {
               placeholder="Write your name">
             </Input>
           </div>
-
-
-        <br/>
         <Button
           onClick={e => highfive(e)}
           className='waveButton'
