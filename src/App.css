@@ -37,6 +37,7 @@
   text-align: center;
   color: gray;
   margin-top: 16px;
+  width: 90%;
 }
 
 .wave-title {
@@ -146,6 +147,49 @@
   font-size: 12px;
 }
 
+@media (max-width: 900px) {
+
+  .wave-title {
+    position: absolute;
+    top: 35%;
+    right: 5%;
+    color: white;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .wave-board-list {
+    position: absolute;
+    top: 40%;
+    right: 1%;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-auto-rows: 190px;
+    grid-gap: 5px;
+  }
+
+  .highfive-title {
+    position: absolute;
+    top: 35%;
+    left: 3%;
+    color: white;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .highfive-board-list {
+    position: absolute;
+    top: 40%;
+    left: 1%;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-auto-rows: 250px;
+    grid-gap: 5px;
+  }
+}
+
 @media (max-width: 650px) {
   .mainContainer {
     margin-top: 15px;
@@ -162,7 +206,7 @@
     position: absolute;
     font-size: 1.5rem;
     top: 45%;
-    right: -23%;
+    right: 5%;
     color: white;
     text-align: center;
     margin: 10px;
@@ -185,7 +229,7 @@
   .wave-board-list {
     position: absolute;
     top: 50%;
-    right: -49%;
+    right: -15%;
     bottom: 0;
     display: grid;
     grid-template-columns: repeat(1, 3fr);
@@ -295,7 +339,7 @@
   .highfive-buttonDiv {
     position: absolute;
     left: 12%;
-    top: 17%;
+    top: 20%;
     width: 50%;
   }
 
