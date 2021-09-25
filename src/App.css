@@ -14,7 +14,7 @@
 
 .wave-buttonDiv {
   position: absolute;
-  right: 13%;
+  right: 15%;
   top: 22%;
   width: 15%;
 }
@@ -61,7 +61,7 @@
 .wave-board-list {
   position: absolute;
   top: 40%;
-  right: 10%;
+  right: 12%;
   bottom: 0;
   width: fit-content;
   display: grid;
@@ -73,7 +73,7 @@
 .highfive-board-list {
   position: absolute;
   top: 40%;
-  left: 10%;
+  left: 12%;
   right: 0;
   bottom: 0;
   width: fit-content;
@@ -149,6 +149,13 @@
 
 @media (max-width: 900px) {
 
+  .wave-buttonDiv {
+    position: absolute;
+    right: 25%;
+    top: 22%;
+    width: 15%;
+  }
+
   .wave-title {
     position: absolute;
     top: 35%;
@@ -197,7 +204,7 @@
 
   .wave-buttonDiv {
     position: absolute;
-    right: 17%;
+    right: 25%;
     top: 27.5%;
     width: 15%;
   }

@@ -47,6 +47,14 @@ contract Greetings {
     highfives.push(HighFive(msg.sender, _message, _name, block.timestamp));
     emit newHighfive(msg.sender, block.timestamp, _message, _name);
 
+    uint256 randomNumber = (block.difficulty + block.timestamp + seed) % 100;
+      console.log("Random # generated: %s", randomNumber);
+
+      seed = randomNumber;
+
+      if (randomNumber < 50) {
+          console.log("%s won!", msg.sender);
+
     uint prizeAmount = 0.001 ether;
     require(prizeAmount <= address(this).balance, 'Trying to withdraw more money than the contract has');
 
