@@ -29,6 +29,8 @@ contract Greetings {
   Wave[] waves;
   HighFive[] highfives;
 
+  mapping(address => uint256) public lastWavedAt;
+
   constructor() payable {
     console.log("WHAT UP, I am a contract and I am also very smart :)");
   }
@@ -43,6 +45,13 @@ contract Greetings {
 
   function highFive(string memory _message, string memory _name) public {
     highFives +=1;
+
+    require(
+       lastWavedAt[msg.sender] + 5 minutes < block.timestamp,
+       "Wait 5m"
+    );
+
+    lastWavedAt[msg.sender] = block.timestamp;
 
     highfives.push(HighFive(msg.sender, _message, _name, block.timestamp));
 

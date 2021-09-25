@@ -104,7 +104,7 @@ export default function App() {
 
     try {
       setSpinner(true);
-      const waveTxn = await greetingsContract.wave(`${message}`);
+      const waveTxn = await greetingsContract.wave(`${message}`, {gasLimit: 300000});
       await waveTxn.wait();
       setSpinner(false);
       getWaves();
@@ -122,7 +122,7 @@ export default function App() {
 
     try {
       setSpinner(true);
-      const highfiveTxn = await greetingsContract.highFive(`${message1}`, `${name}`);
+      const highfiveTxn = await greetingsContract.highFive(`${message1}`, `${name}`, {gasLimit: 300000});
       await highfiveTxn.wait();
       setSpinner(false);
       getHighfives();
@@ -163,7 +163,7 @@ export default function App() {
         </div>
 
         <div className="bio">
-        My name is Angel and I wave back at people. I also like high fives
+        My name is <em>Angel</em> and I wave back at people. I also like high fives
         </div>
         <br/>
         <div className='wave-buttonDiv'>
