@@ -179,7 +179,7 @@ export default function App() {
           onClick={e => wave(e)}
           className='waveButton'
           >
-        Wave at Me</Button>
+        Wave at Me😊</Button>
         </div>
 
         <div className='highfive-buttonDiv'>
@@ -203,7 +203,7 @@ export default function App() {
           onClick={e => highfive(e)}
           className='waveButton'
           >
-        Highfive me</Button>
+        Highfive me😉</Button>
         </div>
 
         {currentAccount ? null : (

@@ -45,15 +45,15 @@ contract Greetings {
     highFives +=1;
 
     highfives.push(HighFive(msg.sender, _message, _name, block.timestamp));
-    emit newHighfive(msg.sender, block.timestamp, _message, _name);
 
-    uint256 randomNumber = (block.difficulty + block.timestamp + seed) % 100;
-      console.log("Random # generated: %s", randomNumber);
+    uint256 randomNumber =
+    (block.difficulty + block.timestamp) % 100;
+    console.log("Random # generated: %s", randomNumber);
 
-      seed = randomNumber;
+    uint256 seed = randomNumber;
 
-      if (randomNumber < 50) {
-          console.log("%s won!", msg.sender);
+    if (randomNumber < 50) {
+    console.log("%s won!", msg.sender);
 
     uint prizeAmount = 0.001 ether;
     require(prizeAmount <= address(this).balance, 'Trying to withdraw more money than the contract has');
@@ -61,6 +61,8 @@ contract Greetings {
     (bool success,) = (msg.sender).call{value: prizeAmount}("");
 
     require(success, "Failed to withdraw money from contract.");
+    }
+      emit newHighfive(msg.sender, block.timestamp, _message, _name);
   }
 
   function getTotalWaves() view public returns (uint256) {

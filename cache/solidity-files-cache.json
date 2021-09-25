@@ -36,8 +36,8 @@
       ]
     },
     "C:\\Users\\AngelDESK\\Desktop\\DEV Projects\\Solidity\\Buildpsace\\Wave Portal\\contracts\\Greeter.sol": {
-      "lastModificationDate": 1632259475621,
-      "contentHash": "4a90c8b25a1881e0f4940a3bd1dbce56",
+      "lastModificationDate": 1632533801079,
+      "contentHash": "60ac6997f0579de716b54849fd6b861c",
       "sourceName": "contracts/Greeter.sol",
       "solcConfig": {
         "version": "0.8.4",

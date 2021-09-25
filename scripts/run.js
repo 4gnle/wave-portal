@@ -41,6 +41,10 @@ async function main() {
   let allHighfives = await greetingsContract.getSentHIGHFIVES();
   console.log(allWaves);
   console.log(allHighfives);
+
+  contractBalance = await hre.ethers.provider.getBalance(greetingsContract.address);
+  console.log("Now the contract has:", hre.ethers.utils.formatEther(contractBalance, "ether"))
+
 }
 
 main()
